@@ -18,12 +18,14 @@ function App() {
     setWeatherData(null);
 
     try {
+      setLoading(true);
       const response = await axios.get(
         `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
       );
       setWeatherData(response.data);
+      setLoading(false);
     } catch (err) {
-      alert('Failed to fetch weather data');
+      setError('Failed to fetch weather data');
     } finally {
       setLoading(false);
     }
