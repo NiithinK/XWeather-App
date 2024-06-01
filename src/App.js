@@ -18,12 +18,10 @@ function App() {
     setWeatherData(null);
 
     try {
-      setLoading(true);
       const response = await axios.get(
         `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`
       );
       setWeatherData(response.data);
-      setLoading(false);
     } catch (err) {
       setError('Failed to fetch weather data');
     } finally {
@@ -42,31 +40,33 @@ function App() {
         <input
           type="text"
           value={city}
-          style={{borderRadius:'4px'}}
+          style={{ borderRadius: '4px' }}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Enter city name"
         />
-        <button style={{borderRadius:'4px',}} onClick={handleSearch}>Search</button>
+        <button style={{ borderRadius: '4px' }} onClick={handleSearch}>
+          Search
+        </button>
       </div>
       {loading && <p>Loading data…</p>}
       {error && <p>{error}</p>}
       {weatherData && (
         <div className="weather-cards">
-          <div className="weather-card" style={{background:'white'}}>
-            <h2 style={{textAlign:'center'}}>Temperature</h2>
-            <p style={{textAlign:'center'}}>{weatherData.current.temp_c} °C</p>
+          <div className="weather-card" style={{ background: 'white' }}>
+            <h2 style={{ textAlign: 'center' }}>Temperature</h2>
+            <p style={{ textAlign: 'center' }}>{weatherData.current.temp_c} °C</p>
           </div>
-          <div className="weather-card" style={{background:'white'}}>
-            <h2 style={{textAlign:'center'}}>Humidity</h2>
-            <p style={{textAlign:'center'}}>{weatherData.current.humidity} %</p>
+          <div className="weather-card" style={{ background: 'white' }}>
+            <h2 style={{ textAlign: 'center' }}>Humidity</h2>
+            <p style={{ textAlign: 'center' }}>{weatherData.current.humidity} %</p>
           </div>
-          <div className="weather-card" style={{background:'white'}}>
-            <h2 style={{textAlign:'center'}}>Condition</h2>
-            <p style={{textAlign:'center'}}>{weatherData.current.condition.text}</p>
+          <div className="weather-card" style={{ background: 'white' }}>
+            <h2 style={{ textAlign: 'center' }}>Condition</h2>
+            <p style={{ textAlign: 'center' }}>{weatherData.current.condition.text}</p>
           </div>
-          <div className="weather-card" style={{background:'white'}}>
-            <h2 style={{textAlign:'center'}}>Wind Speed</h2>
-            <p style={{textAlign:'center'}}>{weatherData.current.wind_kph} kph</p>
+          <div className="weather-card" style={{ background: 'white' }}>
+            <h2 style={{ textAlign: 'center' }}>Wind Speed</h2>
+            <p style={{ textAlign: 'center' }}>{weatherData.current.wind_kph} kph</p>
           </div>
         </div>
       )}
